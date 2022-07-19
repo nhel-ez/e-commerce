@@ -1,0 +1,45 @@
+<?php 
+    $field0name = $row["id"];
+    $trackingNo = $row["trackingNo"];
+    $field1name = $row["userName"];
+    $field2name = $row["firstName"];
+    $field3name = $row["lastName"];
+    $field4name = $row["contactNumber"];
+    $field5name = $row["email"];
+    $field6name = $row["homeAddress"];
+    $field7name = $row["item"];
+    $variation = $row["variation"];
+    $size = $row["size"];
+    $field8name = $row["price"];
+    $field9name = $row["quantity"];
+    $field10name = $row["shippingFee"];
+    $field11name = $row["paymentMethod"];
+    $field12name = $row["paymentProof"];
+    $field13name = $row["status"];
+    $field14name = $row["create_datetime"];
+    $field15name = $row["updated_datetime"];
+    $field16name = $row["url"];
+    $field17name = $row["rate"];
+
+    $usernameText = "Username";
+    $nameText = "Name";
+    $contactNumberText = "Contact Number";
+    $emailText = "Email";
+    $homeAddressText = "Address";
+    $itemText = "Item";
+    $variationText = "Variation";
+    $sizeText = "Size";
+    $priceText = "Price";
+    $quantityText = "Quantity";
+    $shippingFeeText = "Shipping Fee";
+    $paymentMethodText = "Payment Method";
+    $TotalPriceText = "Total Price";
+    $statusText = "Status";
+    $create_datetimeText = "Date of Order";
+    $peso = "₱";
+    $arrival = date("F j, Y D", strtotime($field15name . ' + 10 days'));
+    $date = date("F j, Y D g:i a", strtotime($field14name));
+    $multiply = ($field8name * $field9name) + $field10name;
+    $commaPrice = number_format($field8name, 2, '.', ',');
+    $commaTotalPrice = number_format($multiply, 2, '.', ',');
+?>

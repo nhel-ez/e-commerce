@@ -1,5 +1,5 @@
 <?php
-include('sources/session.php');
+include('sources/session-admin.php');
 date_default_timezone_set('Asia/Manila');
 ?>
 
@@ -17,7 +17,7 @@ date_default_timezone_set('Asia/Manila');
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet" />
 
-    <title>Orders</title>
+    <title>Admin Profile</title>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
@@ -38,7 +38,6 @@ date_default_timezone_set('Asia/Manila');
     </div>
     <!-- ***** Preloader End ***** -->
 
-
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
         <div class="container">
@@ -46,7 +45,7 @@ date_default_timezone_set('Asia/Manila');
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="home.php" class="logo">
+                        <a href="admin-home.php" class="logo">
                             <img src="assets/images/logo-head.png">
                         </a>
                         <!-- ***** Logo End ***** -->
@@ -54,26 +53,25 @@ date_default_timezone_set('Asia/Manila');
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section">
-                                <a href="home.php">Home</a>
+                                <a href="admin-home.php">Home</a>
                             </li>
                             <li class="scroll-to-section">
-                                <a href="about.php">About Us</a>
+                                <a href="admin-about.php">About</a>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:;" class="active">Shopping Cart</a>
+                                <a href="javascript:;">Orders</a>
                                 <ul>
-                                    <li><a href="orders.php">Add to Cart</a></li>
-                                    <li><a href="checkout.php">Checkout</a></li>
-                                    <li><a href="to-ship.php">To Ship</a></li>
-                                    <li><a href="cancel.php">Canceled</a></li>
-                                    <li><a href="delivered.php">Delivered</a></li>
+                                    <li><a href="admin-checkout.php">Checkout</a></li>
+                                    <li><a href="admin-to-ship.php">To Ship</a></li>
+                                    <li><a href="admin-cancel.php">Canceled</a></li>
+                                    <li><a href="admin-delivered.php">Delivered</a></li>
                                 </ul>
                             </li>
                             <li class="scroll-to-section">
-                                <a href="profile.php">Profile</a>
+                                <a href="admin-profile.php" class="active">Profile</a>
                             </li>
                             <li class="scroll-to-section">
-                                <a href="logout.php">Logout</a>
+                                <a href="admin-logout.php">Logout</a>
                             </li>
                         </ul>
                         <a class="menu-trigger">
@@ -92,7 +90,7 @@ date_default_timezone_set('Asia/Manila');
                 <div class="col-12">
                     <div class="shadow p-3 mb-5 bg-body rounded" style="background-color:black; opacity:80%;">
                         <div class="card-body">
-                            <h3 style="color:white;">Add to Cart</h3>
+                            <h3 style="color:white;">Admin Profile</h3>
                         </div>
                     </div>
                 </div>
@@ -102,13 +100,21 @@ date_default_timezone_set('Asia/Manila');
 
     <?php
         require('sources/db.php'); 
-        $query = "SELECT * FROM fillup WHERE username='$username' AND status='Add To Cart' ORDER BY create_datetime DESC";
+        $query = "SELECT * FROM admin WHERE adminName='$adminName'";
         $result = mysqli_query($con, $query) or die ("Could not Connect to database");
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
 
-                include('sources/rows.php');
+                $field0name = $row["id"];
+                $field1name = $row["adminName"];
+                $field2name = $row["adminFirstName"];
+                $field3name = $row["adminLastName"];
+                $field5name = $row["adminEmail"];
+
+                $usernameText = "Admin Name";
+                $nameText = "Name";
+                $emailText = "Email";
 
                 echo '<section class="">
                         <div class="container">
@@ -118,64 +124,35 @@ date_default_timezone_set('Asia/Manila');
                                         <div class="card-body p-4">
                                             <div class="d-flex justify-content-between align-items-center mb-5">
                                                 <div>
-                                                    <h5 class="mb-0">Tracking No. <span class="text-secondary font-weight-bold">'.$trackingNo.'</span></h5>
+                                                    <h3 class="mb-0">'.$field1name.'<span class="text-secondary font-weight-bold"></span></h3>
                                                 </div>
                                                 <div class="text-end">
-                                                        <p class="mb-0">Arrival: <span>'.$arrival.'</span></p>
+                                                        <p class="mb-0"><span></span></p>
                                                 </div>
                                             </div>
-                                            <hr>
-                                            <h3>'.$field7name.'</h3><hr>
+                                            <p>'.$nameText.' : '.$field2name.' '.$field3name.'</p>
+                                            <p>'.$emailText.' : '.$field5name.'</p>
+                                            <br>
 
-                                            <p>'.$itemText.' : '.$field7name.'</p>
-                                            <p>'.$variationText.' : '.$variation.'</p>
-                                            <p>'.$sizeText.' : '.$size.'</p>
-                                            <p>'.$priceText.' : '.$peso .' '.$commaPrice.'</p>
-                                            <p>'.$quantityText.' : '.$field9name.'</p>
-                                            <p>'.$shippingFeeText.' : '.$peso .' '.$field10name.'</p>
-                                            <p>'.$TotalPriceText.' : '.$peso .' '.$commaTotalPrice.'</p>
-                                            <p>'.$statusText.' : '.$field13name.'</p><br>
-
-                                            <a href="delete.php?id='.$field0name.'">
-                                                <button type="button" class="btn btn-danger">Remove</button>
+                                            <a href="admin-edit-profile.php?id='.$field0name.'">
+                                                <button class="btn btn-dark">Edit Profile</button>
                                             </a>
-                                            <a href="confirm-checkout.php?id='.$field0name.'">
-                                                <button type="button" class="btn btn-primary">Checkout</button>
-                                            </a>
-                                            <a href="'.$field16name.'">
-                                                <button type="button" class="btn btn-dark">View Item</button>
+                                            <a href="admin-change-password.php?id='.$field0name.'">
+                                                <button class="btn btn-outline-dark">Change Password</button>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                </section>';
+                    </section>';
                 }
-        $result->free();
+            $result->free();
         }
-        else {
-            echo '<section class="">
-                    <div class="container">
-                        <div class="row d-flex justify-content-center align-items-center h-100">
-                            <div class="col-12">
-                                <div class="shadow p-3 mb-5 bg-body rounded">
-                                    <div class="card-body p-5">
-                                         <center>
-                                            <h5>No Item Found</h5>
-                                        </center>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>';   
-        }
-    
     ?>
 
     <?php
-    include('sources/footer.php');
+    include('sources/footer-admin.php');
     ?>
 
     <!-- jQuery -->

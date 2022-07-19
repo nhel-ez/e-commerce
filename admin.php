@@ -1,26 +1,26 @@
 <?php
-include('sources/session-login.php');
+include('sources/session-login-admin.php');
 date_default_timezone_set('Asia/Manila');
 
         require('sources/db.php');
 
         if (isset($_POST['submit'])) {
-            $username = stripslashes($_REQUEST['username']); 
-            $username = mysqli_real_escape_string($con, $username);
+            $adminName = stripslashes($_REQUEST['adminName']); 
+            $adminName = mysqli_real_escape_string($con, $adminName);
         
             $password = stripslashes($_REQUEST['password']);
             $password = mysqli_real_escape_string($con, $password);
         
-            $query = "SELECT * FROM `users` WHERE username='$username'
+            $query = "SELECT * FROM `admin` WHERE adminName='$adminName'
                 AND password='" . md5($password) . "'";
             
             $result = mysqli_query($con, $query) or die(mysql_error());
             $rows = mysqli_num_rows($result);
 
             if ($rows == 1) {
-                $_SESSION['username'] = $username;
+                $_SESSION['adminName'] = $adminName;
             
-                header("Location: home.php");
+                header("Location: admin-home.php");
             }
             
             else {
@@ -35,13 +35,13 @@ date_default_timezone_set('Asia/Manila');
 
 <head>
     <link rel="icon" type="image/png" href="logo-tab.png">
-    <title>Login</title>
+    <title>Admin Login</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
+    <meta name="description" content="Toys">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
+    <meta name="keywords" content="Stitch" />
+    <meta name="author" content="Leonel Esguerra" />
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -79,9 +79,9 @@ date_default_timezone_set('Asia/Manila');
                                         </div>
 
                                         <div class="form-outline mb-2">
-                                            <label class="form-label" for="" style="float:left;">Username</label>
-                                            <input type="text" id="form2Example11" class="form-control" name="username"
-                                                value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>"
+                                            <label class="form-label" for="" style="float:left;">Admin Name</label>
+                                            <input type="text" id="" class="form-control" name="adminName"
+                                                value="<?php if(isset($_COOKIE["adminName"])) { echo $_COOKIE["adminName"]; } ?>"
                                                 required />
                                         </div>
 
@@ -95,21 +95,19 @@ date_default_timezone_set('Asia/Manila');
                                         </div>
 
                                         <div class="form-outline mb-4">
-                                            <input type="checkbox" name="remember" style="margin-right:5px;" />Remember
+                                            <input type="checkbox" name="admin-remember"
+                                                style="margin-right:5px;" />Remember
                                             me
                                         </div>
 
                                         <div class="text-center pt-1 mb-5 pb-1">
-                                            <a class="text-muted" href="forgot-password.php"
-                                                style="margin-right:10px;">Forgot
-                                                password?</a>
                                             <button class="btn btn-dark" type="submit" name="submit">Sign In</button>
                                         </div>
                                     </form>
 
                                     <div class="d-flex align-items-center justify-content-center pb-4">
                                         <p class="mb-0 me-2">Don't have an account?</p>
-                                        <a href="registration.php"><button type="button"
+                                        <a href="admin-register.php"><button type="button"
                                                 class="btn btn-outline-dark">Sign Up</button>
                                         </a>
                                     </div>
@@ -119,11 +117,11 @@ date_default_timezone_set('Asia/Manila');
                             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                                 <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                                     <h4 class="mb-4">New Startup E-commerce</h4>
-                                    <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        seddo eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                        minim veniam,
-                                        quis nostrudexercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.</p>
+                                    <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud
+                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                 </div>
                             </div>
                         </div>

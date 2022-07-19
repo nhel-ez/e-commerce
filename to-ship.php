@@ -17,7 +17,7 @@ date_default_timezone_set('Asia/Manila');
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet" />
 
-    <title>Orders</title>
+    <title>To Ship</title>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
@@ -92,7 +92,7 @@ date_default_timezone_set('Asia/Manila');
                 <div class="col-12">
                     <div class="shadow p-3 mb-5 bg-body rounded" style="background-color:black; opacity:80%;">
                         <div class="card-body">
-                            <h3 style="color:white;">Add to Cart</h3>
+                            <h3 style="color:white;">To Ship</h3>
                         </div>
                     </div>
                 </div>
@@ -101,8 +101,8 @@ date_default_timezone_set('Asia/Manila');
     </section>
 
     <?php
-        require('sources/db.php'); 
-        $query = "SELECT * FROM fillup WHERE username='$username' AND status='Add To Cart' ORDER BY create_datetime DESC";
+        require('sources/db.php');; 
+        $query = "SELECT * FROM fillup WHERE username='$username' AND status='To Ship' ORDER BY create_datetime DESC";
         $result = mysqli_query($con, $query) or die ("Could not Connect to database");
 
         if (mysqli_num_rows($result) > 0) {
@@ -127,21 +127,21 @@ date_default_timezone_set('Asia/Manila');
                                             <hr>
                                             <h3>'.$field7name.'</h3><hr>
 
+                                            <p>'.$nameText.' : '.$field2name.' '.$field3name.'</p>
+                                            <p>'.$contactNumberText.' : '.$field4name.'</p>
+                                            <p>'.$emailText.' : '.$field5name.'</p>
+                                            <p>'.$homeAddressText.' : '.$field6name.'</p>
                                             <p>'.$itemText.' : '.$field7name.'</p>
                                             <p>'.$variationText.' : '.$variation.'</p>
                                             <p>'.$sizeText.' : '.$size.'</p>
                                             <p>'.$priceText.' : '.$peso .' '.$commaPrice.'</p>
                                             <p>'.$quantityText.' : '.$field9name.'</p>
                                             <p>'.$shippingFeeText.' : '.$peso .' '.$field10name.'</p>
+                                            <p>'.$paymentMethodText.' : '.$field11name.'</p>
                                             <p>'.$TotalPriceText.' : '.$peso .' '.$commaTotalPrice.'</p>
-                                            <p>'.$statusText.' : '.$field13name.'</p><br>
+                                            <p>'.$statusText.' : '.$field13name.'</p>
+                                            <p>'.$create_datetimeText.' : '.$date.'</p><br>
 
-                                            <a href="delete.php?id='.$field0name.'">
-                                                <button type="button" class="btn btn-danger">Remove</button>
-                                            </a>
-                                            <a href="confirm-checkout.php?id='.$field0name.'">
-                                                <button type="button" class="btn btn-primary">Checkout</button>
-                                            </a>
                                             <a href="'.$field16name.'">
                                                 <button type="button" class="btn btn-dark">View Item</button>
                                             </a>
@@ -151,8 +151,8 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                         </div>
                 </section>';
-                }
-        $result->free();
+                }             
+            $result->free();
         }
         else {
             echo '<section class="">
@@ -171,7 +171,6 @@ date_default_timezone_set('Asia/Manila');
                     </div>
                 </section>';   
         }
-    
     ?>
 
     <?php

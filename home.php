@@ -1,5 +1,6 @@
 <?php
-include('sources/session-login.php');
+include('sources/session.php');
+include('sources/stay-login.php');
 date_default_timezone_set('Asia/Manila');
 ?>
 
@@ -7,7 +8,8 @@ date_default_timezone_set('Asia/Manila');
 <html lang="en">
 
 <head>
-    <link rel="icon" type="image/png" href="logo-tab.png" />
+    <link rel="icon" type="image/png" href="logo-tab.png">
+    <link rel="icon" type="image/png" href="logo-tab.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
@@ -56,13 +58,23 @@ date_default_timezone_set('Asia/Manila');
                                 <a href="#top" class="active">Home</a>
                             </li>
                             <li class="scroll-to-section">
-                                <a href="i-about.php">About Us</a>
+                                <a href="about.php">About Us</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="javascript:;">Shopping Cart</a>
+                                <ul>
+                                    <li><a href="orders.php">Add to Cart</a></li>
+                                    <li><a href="checkout.php">Checkout</a></li>
+                                    <li><a href="to-ship.php">To Ship</a></li>
+                                    <li><a href="cancel.php">Canceled</a></li>
+                                    <li><a href="delivered.php">Delivered</a></li>
+                                </ul>
                             </li>
                             <li class="scroll-to-section">
-                                <a href="login.php">Sign In</a>
+                                <a href="profile.php">Profile</a>
                             </li>
                             <li class="scroll-to-section">
-                                <a href="registration.php">Sign Up</a>
+                                <a href="logout.php">Logout</a>
                             </li>
                         </ul>
                         <a class="menu-trigger">
@@ -89,9 +101,8 @@ date_default_timezone_set('Asia/Manila');
                                 </h4>
                                 <span style="color: black; font-size: 18px">Elegant and awesome clothes for
                                     everyone.</span>
-                                <a href="login.php" style="color: white">
-                                    <button class="btn-grad">Get Started</button>
-                                </a>
+                                <a href="#women" style="color: white">
+                                    <button class="btn-grad">Purchase Now!</button></a>
                             </div>
                             <img src="assets/images/image-white.png" alt="" />
                         </div>
@@ -132,12 +143,12 @@ date_default_timezone_set('Asia/Manila');
                         <div class="owl-men-item owl-carousel">
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="men1.php">
                                         <img src="assets/images/image6.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Summer Polo</a></h4>
+                                    <h4><a href="men1.php" class="text-dark">Summer Polo</a></h4>
                                     <span>PHP 718.74</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -163,12 +174,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="men2.php">
                                         <img src="assets/images/image7.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Spring</a></h4>
+                                    <h4><a href="men2.php" class="text-dark">Spring</a></h4>
                                     <span>PHP 977.68</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -194,12 +205,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="men3.php">
                                         <img src="assets/images/image8.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Men's Jogger</a></h4>
+                                    <h4><a href="men3.php" class="text-dark">Men's Jogger</a></h4>
                                     <span>PHP 988.75</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -225,12 +236,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="men4.php">
                                         <img src="assets/images/image9.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Cotton T-Shirt</a></h4>
+                                    <h4><a href="men4.php" class="text-dark">Cotton T-Shirt</a></h4>
                                     <span>PHP 1,428.34</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -285,12 +296,12 @@ date_default_timezone_set('Asia/Manila');
                         <div class="owl-women-item owl-carousel">
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="women1.php">
                                         <img src="assets/images/women1.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Summer Dress</a></h4>
+                                    <h4><a href="women1.php" class="text-dark">Summer Dress</a></h4>
                                     <span>PHP 740.82</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -316,12 +327,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="women2.php">
                                         <img src="assets/images/women2.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Leisure Dress</a></h4>
+                                    <h4><a href="women2.php" class="text-dark">Leisure Dress</a></h4>
                                     <span>PHP 3,021.46</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -347,12 +358,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="women3.php">
                                         <img src="assets/images/women3.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Ribbon Butterfly</a></h4>
+                                    <h4><a href="women3.php" class="text-dark">Ribbon Butterfly</a></h4>
                                     <span>PHP 17.35</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -378,12 +389,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="women4.php">
                                         <img src="assets/images/women4.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Chiffon Blouse</a></h4>
+                                    <h4><a href="women4.php" class="text-dark">Chiffon Blouse</a></h4>
                                     <span>PHP 734.66</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -438,12 +449,12 @@ date_default_timezone_set('Asia/Manila');
                         <div class="owl-kid-item owl-carousel">
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="kids1.php">
                                         <img src="assets/images/kids1.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Girl Kids Dress</a></h4>
+                                    <h4><a href="kids1.php" class="text-dark">Girl Kids Dress</a></h4>
                                     <span>PHP 599.26</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -469,12 +480,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="kids2.php">
                                         <img src="assets/images/kids2.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Bowknot Ribbon</a></h4>
+                                    <h4><a href="kids2.php" class="text-dark">Bowknot Ribbon</a></h4>
                                     <span>PHP 94.00</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -500,12 +511,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="kids3.php">
                                         <img src="assets/images/kids3.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Summer Calf</a></h4>
+                                    <h4><a href="kids3.php" class="text-dark">Summer Calf</a></h4>
                                     <span>PHP 558.97</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -531,12 +542,12 @@ date_default_timezone_set('Asia/Manila');
                             </div>
                             <div class="item">
                                 <div class="thumb">
-                                    <a href="login.php">
+                                    <a href="kids4.php">
                                         <img src="assets/images/kids4.png" alt="" style="border: 1px solid gray" />
                                     </a>
                                 </div>
                                 <div class="down-content">
-                                    <h4><a href="login.php" class="text-dark">Polo Kids Clothes</a></h4>
+                                    <h4><a href="kids4.php" class="text-dark">Polo Kids Clothes</a></h4>
                                     <span>PHP 638.98</span>
                                     <ul class="stars" style="border: 1px solid black; border-radius:20px;">
                                         <?php
@@ -569,7 +580,7 @@ date_default_timezone_set('Asia/Manila');
     <!-- ***** Kids Area Ends ***** -->
 
     <?php
-    include('sources/i-footer.php');
+    include('sources/footer.php');
     ?>
 
     <!-- jQuery -->

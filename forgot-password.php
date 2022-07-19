@@ -2,32 +2,36 @@
 include('sources/session-login.php');
 date_default_timezone_set('Asia/Manila');
 
-        require('sources/db.php');
+    require('sources/db.php');
 
-        if (isset($_POST['submit'])) {
-            $username = stripslashes($_REQUEST['username']); 
-            $username = mysqli_real_escape_string($con, $username);
+    if (isset($_POST['submit'])) {
+
+            $userEmail = stripslashes($_REQUEST['userEmail']);
+            $userEmail = mysqli_real_escape_string($con, $userEmail);
         
-            $password = stripslashes($_REQUEST['password']);
-            $password = mysqli_real_escape_string($con, $password);
+            $securityQuestion = stripslashes($_REQUEST['securityQuestion']);
+            $securityQuestion = mysqli_real_escape_string($con, $securityQuestion);
+
+            $securityAnswer = stripslashes($_REQUEST['securityAnswer']);
+            $securityAnswer = mysqli_real_escape_string($con, $securityAnswer);
         
-            $query = "SELECT * FROM `users` WHERE username='$username'
-                AND password='" . md5($password) . "'";
+            $query = "SELECT * FROM `users` WHERE userEmail='$userEmail' AND securityQuestion='$securityQuestion' AND securityAnswer='$securityAnswer'";
             
             $result = mysqli_query($con, $query) or die(mysql_error());
             $rows = mysqli_num_rows($result);
 
             if ($rows == 1) {
-                $_SESSION['username'] = $username;
+                $_SESSION['securityQuestion'] = $securityQuestion;
             
-                header("Location: home.php");
+                header("Location: reset-password.php");
             }
             
             else {
-                $error = "The password you gave is incorrect.";
+                $error = "The email, question and answer did not match!";
             }
         
         }
+
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +42,10 @@ date_default_timezone_set('Asia/Manila');
     <title>Login</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
+    <meta name="description" content="Toys">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
+    <meta name="keywords" content="Stitch" />
+    <meta name="author" content="Leonel Esguerra" />
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -71,59 +75,61 @@ date_default_timezone_set('Asia/Manila');
                                         <h4 class="mt-1 mb-5 pb-1">Shop All You Want!</h4>
                                     </div>
 
-                                    <form method="post" name="login" style="padding-left:15px; padding-right:15px;">
-                                        <p>Please login to your account</p>
+                                    <form method="post" id="password_form">
 
                                         <div class="<?=(@$msg_sucess=="") ? 'error' : 'green' ; ?> mb-2" id="logerror">
                                             <?php echo @$error; ?>
                                         </div>
 
                                         <div class="form-outline mb-2">
-                                            <label class="form-label" for="" style="float:left;">Username</label>
-                                            <input type="text" id="form2Example11" class="form-control" name="username"
-                                                value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>"
-                                                required />
+                                            <label class="form-label" for="" style="float:left;">Email</label>
+                                            <input type="email" id="" class="form-control" name="userEmail" required />
                                         </div>
 
                                         <div class="form-outline mb-2">
-                                            <label class="form-label" for="" style="float:left;">Password</label>
-                                            <input type="password" id="password" class="form-control" name="password"
-                                                value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>"
-                                                required />
-                                            <span id="toggle_pwd" class="fa-solid fa-eye-slash"
-                                                style="margin-right: 1rem; margin-top: -1.8rem; display:inline; vertical-align: middle; float:right; font-size:18px;"></span>
+                                            <label class="form-label" for="" style="float:left;">Security
+                                                Question</label>
+                                            <select type="text" id="" class="form-control" name="securityQuestion"
+                                                required>
+                                                <option></option>
+                                                <option>In what city were you born?</option>
+                                                <option>What is the name of your favorite pet?</option>
+                                                <option>What is your mother's maiden name?</option>
+                                                <option>What is the name of your first school?</option>
+                                                <option>What was your favorite food as a child?</option>
+                                            </select>
                                         </div>
 
-                                        <div class="form-outline mb-4">
-                                            <input type="checkbox" name="remember" style="margin-right:5px;" />Remember
-                                            me
+                                        <div class=" form-outline mb-2">
+                                            <label class="form-label" for="" style="float:left;">Security
+                                                Answer</label>
+                                            <input type="text" id="securityAnswer" class="form-control"
+                                                name="securityAnswer" required />
                                         </div>
 
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <a class="text-muted" href="forgot-password.php"
-                                                style="margin-right:10px;">Forgot
-                                                password?</a>
-                                            <button class="btn btn-dark" type="submit" name="submit">Sign In</button>
+                                        <div class="text-center pt-1 mb-4 pb-1">
+                                            <button class="btn btn-dark" type="submit" name="submit">
+                                                Continue
+                                            </button>
                                         </div>
                                     </form>
 
                                     <div class="d-flex align-items-center justify-content-center pb-4">
-                                        <p class="mb-0 me-2">Don't have an account?</p>
-                                        <a href="registration.php"><button type="button"
-                                                class="btn btn-outline-dark">Sign Up</button>
-                                        </a>
+                                        <p class="mb-0 me-2">Already have an account?</p>
+                                        <a href="login.php"><button type="button" class="btn btn-outline-dark">Sign
+                                                In</button></a>
                                     </div>
 
                                 </div>
                             </div>
                             <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
                                 <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 class="mb-4">New Startup E-commerce</h4>
-                                    <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        seddo eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                        minim veniam,
-                                        quis nostrudexercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat.</p>
+                                    <h4 class="mb-4">We are more than just a company</h4>
+                                    <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                                        do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                        quis nostrud
+                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                 </div>
                             </div>
                         </div>

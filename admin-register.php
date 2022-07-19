@@ -1,49 +1,37 @@
 <?php
-include('sources/session-login.php');
+include('sources/session-login-admin.php');
 date_default_timezone_set('Asia/Manila');
 
     require('sources/db.php');
 
     if (isset($_REQUEST['submit'])) {
         
-        $username = stripslashes($_REQUEST['username']);
-        $username = mysqli_real_escape_string($con, $username);
+        $adminName = stripslashes($_REQUEST['adminName']);
+        $adminName = mysqli_real_escape_string($con, $adminName);
 
-        $firstname = stripslashes($_REQUEST['firstname']);
-        $firstname = mysqli_real_escape_string($con, $firstname);
+        $adminFirstName = stripslashes($_REQUEST['adminFirstName']);
+        $adminFirstName = mysqli_real_escape_string($con, $adminFirstName);
 
-        $lastname = stripslashes($_REQUEST['lastname']);
-        $lastname = mysqli_real_escape_string($con, $lastname);
+        $adminLastName = stripslashes($_REQUEST['adminLastName']);
+        $adminLastName = mysqli_real_escape_string($con, $adminLastName);
 
-        $contactnumber = stripslashes($_REQUEST['contactnumber']);
-        $contactnumber = mysqli_real_escape_string($con, $contactnumber);
-
-        $userEmail = stripslashes($_REQUEST['userEmail']);
-        $userEmail = mysqli_real_escape_string($con, $userEmail);
-
-        $userAddress = stripslashes($_REQUEST['userAddress']);
-        $userAddress = mysqli_real_escape_string($con, $userAddress);
-
-        $securityQuestion = stripslashes($_REQUEST['securityQuestion']);
-        $securityQuestion = mysqli_real_escape_string($con, $securityQuestion);
-
-        $securityAnswer = stripslashes($_REQUEST['securityAnswer']);
-        $securityAnswer = mysqli_real_escape_string($con, $securityAnswer);
+        $adminEmail = stripslashes($_REQUEST['adminEmail']);
+        $adminEmail = mysqli_real_escape_string($con, $adminEmail);
 
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
 
-        $create_datetime = date("Y-m-d H:i:s");
+        $dateCreated = date("Y-m-d H:i:s");
 
-        $query = "INSERT INTO `users` (username, firstname, lastname, contactnumber, userEmail, userAddress, securityQuestion, securityAnswer, password, create_datetime)
-                    VALUES ('$username', '$firstname', '$lastname', '$contactnumber', '$userEmail', '$userAddress', '$securityQuestion', '$securityAnswer', '" . md5($password) . "', '$create_datetime')";
+        $query = "INSERT INTO `admin` (adminName, adminFirstName, adminLastName, adminEmail, password, dateCreated)
+                    VALUES ('$adminName', '$adminFirstName', '$adminLastName', '$adminEmail', '" . md5($password) . "', '$dateCreated')";
         $result = mysqli_query($con, $query);
 
         if ($result) {
             $msg_sucess = "Your successfully created a account. Please Sign In.";
         }
         else {
-            $error = "The username or email is used in other account";
+            $error = "The username or email is in used in other account";
         }
     }
 
@@ -56,13 +44,13 @@ date_default_timezone_set('Asia/Manila');
 <head>
     <link rel="icon" type="image/png" href="logo-tab.png">
     <link rel="icon" type="image/jpg" href="images/leigelogo.JPG">
-    <title>Registration</title>
+    <title>Admin Sign Up</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
+    <meta name="description" content="Toys">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="" />
-    <meta name="author" content="" />
+    <meta name="keywords" content="Stitch" />
+    <meta name="author" content="Leonel Esguerra" />
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -91,57 +79,30 @@ date_default_timezone_set('Asia/Manila');
 
                                 <form method="post" id="register" name="login"
                                     style="padding-left:15px; padding-right:15px;">
-                                    <p>Please register to your account</p>
+                                    <p>Please register to your admin account</p>
 
                                     <div class="<?=(@$msg_sucess=="") ? 'error' : 'green' ; ?> mb-2" id="logerror">
                                         <?php echo @$error; ?><?php echo @$msg_sucess; ?>
                                     </div>
 
                                     <div class="form-outline mb-2">
-                                        <label class="form-label" for="" style="float:left;">Username</label>
-                                        <input type="text" id="" class="form-control" name="username" required />
+                                        <label class="form-label" for="" style="float:left;">Admin Name</label>
+                                        <input type="text" id="" class="form-control" name="adminName" required />
                                     </div>
 
                                     <div class="form-outline mb-2">
                                         <label class="form-label" for="" style="float:left;">First Name</label>
-                                        <input type="text" id="" class="form-control" name="firstname" required />
+                                        <input type="text" id="" class="form-control" name="adminFirstName" required />
                                     </div>
 
                                     <div class="form-outline mb-2">
                                         <label class="form-label" for="" style="float:left;">Last Name</label>
-                                        <input type="text" id="" class="form-control" name="lastname" required />
-                                    </div>
-
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="" style="float:left;">Contact Number</label>
-                                        <input type="tel" id="" class="form-control" name="contactnumber" required />
+                                        <input type="text" id="" class="form-control" name="adminLastName" required />
                                     </div>
 
                                     <div class="form-outline mb-2">
                                         <label class="form-label" for="" style="float:left;">Email</label>
-                                        <input type="email" id="" class="form-control" name="userEmail" required />
-                                    </div>
-
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="" style="float:left;">Address</label>
-                                        <input type="address" id="" class="form-control" name="userAddress" required />
-                                    </div>
-
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="" style="float:left;">Security Question</label>
-                                        <select type="text" id="" class="form-control" name="securityQuestion" required>
-                                            <option></option>
-                                            <option>In what city were you born?</option>
-                                            <option>What is the name of your favorite pet?</option>
-                                            <option>What is your mother's maiden name?</option>
-                                            <option>What is the name of your first school?</option>
-                                            <option>What was your favorite food as a child?</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-outline mb-2">
-                                        <label class="form-label" for="" style="float:left;">Security Answer</label>
-                                        <input type="text" id="" class="form-control" name="securityAnswer" required />
+                                        <input type="email" id="" class="form-control" name="adminEmail" required />
                                     </div>
 
                                     <div class="form-outline mb-2">
@@ -171,7 +132,7 @@ date_default_timezone_set('Asia/Manila');
 
                                 <div class="d-flex align-items-center justify-content-center pb-4">
                                     <p class="mb-0 me-2">Already have an account?</p>
-                                    <a href="login.php"><button type="button" class="btn btn-outline-dark">Sign
+                                    <a href="admin.php"><button type="button" class="btn btn-outline-dark">Sign
                                             In</button></a>
                                 </div>
 

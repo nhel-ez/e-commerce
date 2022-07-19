@@ -17,13 +17,17 @@ date_default_timezone_set('Asia/Manila');
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet" />
 
-    <title>Orders</title>
+    <title>Profile</title>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css" />
+
     <link rel="stylesheet" href="assets/css/templatemo-hexashop.css" />
+
     <link rel="stylesheet" href="assets/css/owl-carousel.css" />
+
     <link rel="stylesheet" href="assets/css/lightbox.css" />
 </head>
 
@@ -60,7 +64,7 @@ date_default_timezone_set('Asia/Manila');
                                 <a href="about.php">About Us</a>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:;" class="active">Shopping Cart</a>
+                                <a href="javascript:;">Shopping Cart</a>
                                 <ul>
                                     <li><a href="orders.php">Add to Cart</a></li>
                                     <li><a href="checkout.php">Checkout</a></li>
@@ -70,7 +74,7 @@ date_default_timezone_set('Asia/Manila');
                                 </ul>
                             </li>
                             <li class="scroll-to-section">
-                                <a href="profile.php">Profile</a>
+                                <a href="profile.php" class="active">Profile</a>
                             </li>
                             <li class="scroll-to-section">
                                 <a href="logout.php">Logout</a>
@@ -92,7 +96,7 @@ date_default_timezone_set('Asia/Manila');
                 <div class="col-12">
                     <div class="shadow p-3 mb-5 bg-body rounded" style="background-color:black; opacity:80%;">
                         <div class="card-body">
-                            <h3 style="color:white;">Add to Cart</h3>
+                            <h3 style="color:white;">Profile</h3>
                         </div>
                     </div>
                 </div>
@@ -102,13 +106,25 @@ date_default_timezone_set('Asia/Manila');
 
     <?php
         require('sources/db.php'); 
-        $query = "SELECT * FROM fillup WHERE username='$username' AND status='Add To Cart' ORDER BY create_datetime DESC";
+        $query = "SELECT * FROM users WHERE username='$username'";
         $result = mysqli_query($con, $query) or die ("Could not Connect to database");
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_array($result)) {
 
-                include('sources/rows.php');
+                $field0name = $row["id"];
+                $field1name = $row["username"];
+                $field2name = $row["firstname"];
+                $field3name = $row["lastname"];
+                $field4name = $row["contactnumber"];
+                $field5name = $row["userEmail"];
+                $field6name = $row["userAddress"];
+
+                $usernameText = "Username";
+                $nameText = "Name";
+                $contactNumberText = "Contact Nummber";
+                $emailText = "Email";
+                $homeAddressText = "Address";
 
                 echo '<section class="">
                         <div class="container">
@@ -118,60 +134,32 @@ date_default_timezone_set('Asia/Manila');
                                         <div class="card-body p-4">
                                             <div class="d-flex justify-content-between align-items-center mb-5">
                                                 <div>
-                                                    <h5 class="mb-0">Tracking No. <span class="text-secondary font-weight-bold">'.$trackingNo.'</span></h5>
+                                                    <h3 class="mb-0">'.$field1name.'<span class="text-secondary font-weight-bold"></span></h3>
                                                 </div>
                                                 <div class="text-end">
-                                                        <p class="mb-0">Arrival: <span>'.$arrival.'</span></p>
+                                                        <p class="mb-0"><span></span></p>
                                                 </div>
                                             </div>
-                                            <hr>
-                                            <h3>'.$field7name.'</h3><hr>
+                                            <p>'.$nameText.' : '.$field2name.' '.$field3name.'</p>
+                                            <p>'.$contactNumberText.' : '.$field4name.'</p>
+                                            <p>'.$emailText.' : '.$field5name.'</p>
+                                            <p>'.$homeAddressText.' : '.$field6name.'</p><br>
 
-                                            <p>'.$itemText.' : '.$field7name.'</p>
-                                            <p>'.$variationText.' : '.$variation.'</p>
-                                            <p>'.$sizeText.' : '.$size.'</p>
-                                            <p>'.$priceText.' : '.$peso .' '.$commaPrice.'</p>
-                                            <p>'.$quantityText.' : '.$field9name.'</p>
-                                            <p>'.$shippingFeeText.' : '.$peso .' '.$field10name.'</p>
-                                            <p>'.$TotalPriceText.' : '.$peso .' '.$commaTotalPrice.'</p>
-                                            <p>'.$statusText.' : '.$field13name.'</p><br>
-
-                                            <a href="delete.php?id='.$field0name.'">
-                                                <button type="button" class="btn btn-danger">Remove</button>
+                                            <a href="edit-profile.php?id='.$field0name.'">
+                                                <button class="btn btn-dark">Edit Profile</button>
                                             </a>
-                                            <a href="confirm-checkout.php?id='.$field0name.'">
-                                                <button type="button" class="btn btn-primary">Checkout</button>
-                                            </a>
-                                            <a href="'.$field16name.'">
-                                                <button type="button" class="btn btn-dark">View Item</button>
+                                            <a href="change-password.php?id='.$field0name.'">
+                                                <button class="btn btn-outline-dark">Change Password</button>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                </section>';
+                    </section>';
                 }
-        $result->free();
+            $result->free();
         }
-        else {
-            echo '<section class="">
-                    <div class="container">
-                        <div class="row d-flex justify-content-center align-items-center h-100">
-                            <div class="col-12">
-                                <div class="shadow p-3 mb-5 bg-body rounded">
-                                    <div class="card-body p-5">
-                                         <center>
-                                            <h5>No Item Found</h5>
-                                        </center>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>';   
-        }
-    
     ?>
 
     <?php
